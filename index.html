@@ -47,7 +47,8 @@
     <div class="container">
         <h1>Opening...</h1>
         <div class="spinner"></div>
-        <p class="message">If the app does not open automatically, you will be redirected to the Play Store.</p>
+        <p class="message">Attempting to open app...</p>
+        <button class="open-button" id="openBtn">Open App Manually</button>
     </div>
     
     <script>
@@ -56,16 +57,24 @@
         
         if (!data) {
             document.querySelector('.container').innerHTML = 
-                '<h1>Error</h1><p>"Date" parameter missing in URL</p>';
+                '<h1>Error</h1><p>"data" parameter missing in URL</p>';
         } else {
             const appDeepLink = `XTRK://workout?data=${data}`;
-            const playStoreUrl = 'https://play.google.com/store/apps/details?id=';
+            
+            console.log('Deep link:', appDeepLink.substring(0, 100) + '...');
             
             window.location.href = appDeepLink;
             
             setTimeout(() => {
-                window.location.href = playStoreUrl;
-            }, 25000);
+                const button = document.getElementById('openBtn');
+                button.style.display = 'inline-block';
+                button.onclick = () => {
+                    window.location.href = appDeepLink;
+                };
+                document.querySelector('.message').textContent = 
+                    'App did not open automatically. Click the button below:';
+                document.querySelector('.spinner').style.display = 'none';
+            }, 3000);
         }
     </script>
 </body>
