@@ -58,7 +58,7 @@
             document.querySelector('.container').innerHTML = 
                 '<h1>Error</h1><p>"Date" parameter missing in URL</p>';
         } else {
-            const appDeepLink = `XTRK://workout?data=${data}`;
+            const appDeepLink = `xtrk://workout?data=${data}`;
             const playStoreUrl = 'https://play.google.com/store/apps/details?id=';
             
             window.location.href = appDeepLink;
